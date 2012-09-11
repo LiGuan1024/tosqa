@@ -19,7 +19,7 @@ volatile int g_LoopDummy;
 
 int main() 
 {
-    LPC_GPIO1->FIODIR |= 1 << 18; // P1.18 connected to LED1
+		LPC_GPIO1->FIODIR |= 1 << 18; // P1.18 connected to LED1
     while(1)
     {
         int i;
