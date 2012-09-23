@@ -9,8 +9,8 @@ This is just a copy of the "samples/Blink" code included in the
     $ make clean all deploy
     ...
     arm-none-eabi-size Blink.elf
-       text	   data	    bss	    dec	    hex	filename
-       1672	     12	     40	   1724	    6bc	Blink.elf
+       text    data     bss     dec     hex filename
+       1672      12      40    1724     6bc Blink.elf
     ...
     cp Blink.bin /Volumes/MBED/
     
@@ -25,8 +25,8 @@ Still with mbed.ar linked in as runtime
     $ make clean all deploy
     ...
     arm-none-eabi-size Blink.elf
-       text	   data	    bss	    dec	    hex	filename
-       1692	     12	     40	   1744	    6d0	Blink.elf
+       text    data     bss     dec     hex filename
+       1692      12      40    1744     6d0 Blink.elf
 
 Then put the LPCX in ISP mode (press both buttons, in right order) and do:
     lpc21isp Blink.hex /dev/tty.usbserial-A600K1PM 115200 12000
@@ -40,15 +40,15 @@ on the http://redtry.jeelabs.org/projects/tosca/wiki/ExamplesLPC wiki page.
 
 Rmoving all the unused stuff for a plain blink sketch, we get this:
 
-		$ make
-		# XCC main.c -o main.o
-		# XCC core_cm3.c -o core_cm3.o
-		# XCC system_LPC17xx.c -o system_LPC17xx.o
-		# XAS startup.S -o startup.o
-		# XLD main.o core_cm3.o system_LPC17xx.o -o firmware.elf
-			 text    data     bss     dec     hex filename
-				632       0       8     640     280 firmware.elf
-		# OBJCOPY -O binary firmware.elf firmware.bin
+    $ make
+    # XCC main.c -o main.o
+    # XCC core_cm3.c -o core_cm3.o
+    # XCC system_LPC17xx.c -o system_LPC17xx.o
+    # XAS startup.S -o startup.o
+    # XLD main.o core_cm3.o system_LPC17xx.o -o firmware.elf
+       text    data     bss     dec     hex filename
+        632       0       8     640     280 firmware.elf
+    # OBJCOPY -O binary firmware.elf firmware.bin
 
 This was built with an arm-non-eabi cross compiler produced by crosstool-ng,
 see http://crosstool-ng.org for details.
