@@ -1,7 +1,7 @@
 A collection of small "blink" apps used to test various boards and toolchains.
 
-mbed-gcc4mbed - Win/Mac/Lin (2012-09-10)
-----------------------------------------
+mbed-gcc - Win/Mac/Lin (2012-09-10)
+-----------------------------------
 
 This is just a copy of the "samples/Blink" code included in the
 [gcc4mbed](https://github.com/adamgreen/gcc4mbed) toolchain.
@@ -16,8 +16,8 @@ This is just a copy of the "samples/Blink" code included in the
     
 Then press the reset button to reflash and run the new code.
 
-lpc1769 - Mac (2012-09-11)
---------------------------
+lpcx-gcc - Mac (2012-09-11)
+---------------------------
 
 Same copy, modified to run on an LPCXpresso 1769, with LED on the P0.22 pin.
 Still with mbed.ar linked in as runtime
@@ -31,3 +31,24 @@ Still with mbed.ar linked in as runtime
 Then put the LPCX in ISP mode (press both buttons, in right order) and do:
     lpc21isp Blink.hex /dev/tty.usbserial-A600K1PM 115200 12000
 Finally, press reset to exit ISP mode and launch the new code.
+
+bare-gcc - Mac (2012-09-23)
+---------------------------
+
+Adapted from Peter Brier's adaptation of the R2C2 blink example, described
+on the http://redtry.jeelabs.org/projects/tosca/wiki/ExamplesLPC wiki page.
+
+Rmoving all the unused stuff for a plain blink sketch, we get this:
+
+		$ make
+		# XCC main.c -o main.o
+		# XCC core_cm3.c -o core_cm3.o
+		# XCC system_LPC17xx.c -o system_LPC17xx.o
+		# XAS startup.S -o startup.o
+		# XLD main.o core_cm3.o system_LPC17xx.o -o firmware.elf
+			 text    data     bss     dec     hex filename
+				632       0       8     640     280 firmware.elf
+		# OBJCOPY -O binary firmware.elf firmware.bin
+
+This was built with an arm-non-eabi cross compiler produced by crosstool-ng,
+see http://crosstool-ng.org for details.
