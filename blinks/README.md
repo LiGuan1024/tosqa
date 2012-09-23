@@ -40,7 +40,7 @@ on the http://redtry.jeelabs.org/projects/tosca/wiki/ExamplesLPC wiki page.
 
 Rmoving all the unused stuff for a plain blink sketch, we get this:
 
-    $ make
+    $ make clean all
     # XCC main.c -o main.o
     # XCC core_cm3.c -o core_cm3.o
     # XCC system_LPC17xx.c -o system_LPC17xx.o
@@ -52,3 +52,6 @@ Rmoving all the unused stuff for a plain blink sketch, we get this:
 
 This was built with an arm-non-eabi cross compiler produced by crosstool-ng,
 see http://crosstool-ng.org for details.
+
+Note: this code is compiled for base address 0x10000 (64K) and will require
+some sort of secondary boot loader at address 0x0 to start it up properly.

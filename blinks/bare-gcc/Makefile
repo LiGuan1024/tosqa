@@ -25,7 +25,7 @@ firmware.elf: $(OBJ) startup.o
 	@arm-none-eabi-size firmware.elf
 
 .SUFFIXES:
-.SUFFIXES: .o .c .S .elf .hex .bin
+.SUFFIXES: .o .c .S .elf .hex .bin .lss .sym
 
 .c.o:
 	# XCC $? -o $@
@@ -40,6 +40,12 @@ firmware.elf: $(OBJ) startup.o
 .elf.bin:
 	# OBJCOPY -O binary $? $@
 	@arm-none-eabi-objcopy -O binary $? $@
+.elf.lss:
+	# OBJDUMP -h -S -C -r $? >$@
+	@arm-none-eabi-objdump -h -S -C -r $? >$@
+.elf.sym:
+	# NM -n $? >$@
+	@arm-none-eabi-nm -n $? >$@
 
 clean:
-	rm -f *.d *.o firmware.{elf,hex,bin,map}
+	rm -f *.{o,d,elf,hex,bin,lss,sym,map}
