@@ -20,7 +20,7 @@ tosca-disk-mount:
 create-users:
 	useradd -m -G dialout,plugdev tosca
 	useradd -m -G adm,staff,users -b /tdisk build
-	echo "pi ALL=(ALL) NOPASSWD: ALL" >>/etc/sudoers
+	echo "build ALL=(ALL) NOPASSWD: ALL" >>/etc/sudoers
 
 install-packages:
 	apt-get install -y bison flex gperf texinfo gawk libtool automake m4 \
