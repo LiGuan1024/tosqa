@@ -3,8 +3,8 @@ TOSCA_DOWNLOADS = http://...
 all:
 	# type "make fresh" to set up from a fresh RPi image
 
-fresh: adjust-hostname tosca-disk-mount create-users install-packages \
-       install-tosca autorun-tosca set-passwords 
+fresh: adjust-hostname tosca-disk-mount create-users warn-build-login \
+       install-packages install-tosca autorun-tosca set-passwords 
 	# installation complete, rebooting now ...
 	shutdown -r now
 
@@ -22,6 +22,11 @@ create-users:
 	useradd -m -G dialout,plugdev tosca
 	useradd -m -G adm,staff,users build
 	echo "build ALL=(ALL) NOPASSWD: ALL" >>/etc/sudoers
+
+warn-build-login:
+	>~build/.hushlogin
+	echo 'echo "Please insert the TOSCAUSB stick and reboot."' >~build/.bash_login
+	chown build:build ~build/.hushlogin ~build/.bash_login
 
 install-packages:
 	apt-get update
