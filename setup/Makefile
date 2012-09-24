@@ -19,12 +19,12 @@ tosca-disk-mount:
 
 create-users:
 	useradd -m -G dialout,plugdev tosca
-	useradd -m -G adm,staff,users -b /toscadev build
+	useradd -m -G adm,staff,users -b /tdisk build
 	echo "pi ALL=(ALL) NOPASSWD: ALL" >>/etc/sudoers
 
 install-packages:
 	apt-get install -y bison flex gperf texinfo gawk libtool automake m4 \
-	                   libncurses5-dev cvs git
+	                   libncurses5-dev cvs git rsync
 
 install-tosca:
 	#wget $(TOSCA_DOWNLOADS)/tosca-home.tgz
