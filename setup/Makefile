@@ -6,7 +6,7 @@ all:
 fresh: adjust-hostname tosca-disk-mount create-users install-packages \
        install-tosca autorun-tosca set-passwords 
 	# installation complete, rebooting now ...
-	#shutdown -r now
+	shutdown -r now
 
 adjust-hostname:
 	hostname toscapi
@@ -24,6 +24,7 @@ create-users:
 	echo "build ALL=(ALL) NOPASSWD: ALL" >>/etc/sudoers
 
 install-packages:
+	apt-get update
 	apt-get install -y bison flex gperf texinfo gawk libtool automake m4 \
 	                   libncurses5-dev cvs git rsync mtools tmux screen \
 	                   nodejs nginx libzmq-dev libuuid1 luajit luarocks
