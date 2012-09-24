@@ -14,17 +14,18 @@ adjust-hostname:
 	sed -i s/raspberrypi/toscapi/ /etc/hosts
 
 tosca-disk-mount:
-	mkdir -p /tdisk
-	echo "/dev/sda /tdisk ext4 defaults,noatime 0 0" >>/etc/fstab
+	mkdir -p /media/TOSCAUSB
+	echo "/dev/disk/by-label/TOSCAUSB /media/TOSCAUSB vfat defaults,noatime 0 0" >>/etc/fstab
+	echo "/media/TOSCAUSB/tosca-build.img /home/build ext4 defaults,noatime 0 0" >>/etc/fstab
 
 create-users:
 	useradd -m -G dialout,plugdev tosca
-	useradd -m -G adm,staff,users -b /tdisk build
+	useradd -m -G adm,staff,users build
 	echo "build ALL=(ALL) NOPASSWD: ALL" >>/etc/sudoers
 
 install-packages:
 	apt-get install -y bison flex gperf texinfo gawk libtool automake m4 \
-	                   libncurses5-dev cvs git rsync
+	                   libncurses5-dev cvs git rsync mtools
 
 install-tosca:
 	#wget $(TOSCA_DOWNLOADS)/tosca-home.tgz
