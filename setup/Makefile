@@ -14,8 +14,8 @@ adjust-hostname:
 	sed -i s/raspberrypi/toscapi/ /etc/hosts
 
 tosca-disk-mount:
-	mkdir -p /toscadev
-	echo "/dev/sda /toscadev ext4 defaults,noatime 0 0" >>/etc/fstab
+	mkdir -p /tdisk
+	echo "/dev/sda /tdisk ext4 defaults,noatime 0 0" >>/etc/fstab
 
 create-users:
 	useradd -m -G dialout,plugdev tosca
