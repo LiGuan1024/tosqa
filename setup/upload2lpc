@@ -1,0 +1,39 @@
+# Note: this needs to be run as root (sudo su)
+#
+# Upload to an LPCxxxx connected to the RPi serial port as:
+#
+#     ----------------        ------------------
+#    [ RPi            ]      [ LPCXpresso       ]
+#     ----------------        ------------------
+#    TX (pin P1.8)      <--> RX (pin J6.22, P0.3)
+#    RX (pin P1.10)     <--> TX (pin J6.21, P0.2)
+#    GND (pin P1.6)     <--> GND (pin J6.1)
+#    +5V (pin P1.2)     <--> EXT_POWX (pin J6.2)
+#    GPIO18 (pin P1.12) <--> RESET_N (pin J6.4)
+#    GPIO23 (pin P1.16) <--> P2.10 (Pin J6.51)
+
+# export the two GPIO pins to the shell
+echo "18" >/sys/class/gpio/export >&/dev/null
+echo "23" >/sys/class/gpio/export >&/dev/null
+
+# use them as output pins
+echo "out" >/sys/class/gpio/gpio18/direction
+echo "out" >/sys/class/gpio/gpio23/direction
+
+# pull ISP low and prepare for reset
+echo "0" >/sys/class/gpio/gpio23/value
+echo "1" >/sys/class/gpio/gpio18/value
+
+(
+  # it is essential to delay the reset pulse for lpc21isp
+  sleep 0.3
+  # pulse reset low
+  echo "0" >/sys/class/gpio/gpio18/value
+  echo "1" >/sys/class/gpio/gpio18/value
+  # set ISP line high again
+  echo "1" >/sys/class/gpio/gpio23/value
+) &
+
+echo "Uploading... "
+lpc21isp -debug0 -bin $1 /dev/ttyAMA0 115200 12000 \
+  && echo "Done." || exit 1

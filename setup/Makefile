@@ -25,7 +25,8 @@ create-users:
 
 install-packages:
 	apt-get install -y bison flex gperf texinfo gawk libtool automake m4 \
-	                   libncurses5-dev cvs git rsync mtools
+	                   libncurses5-dev cvs git rsync mtools tmux screen \
+	                   nodejs nginx libzmq-dev libuuid1 luajit luarocks
 
 install-tosca:
 	#wget $(TOSCA_DOWNLOADS)/tosca-home.tgz
