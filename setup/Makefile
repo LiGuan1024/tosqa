@@ -32,7 +32,8 @@ install-packages:
 	apt-get update
 	apt-get install -y bison flex gperf texinfo gawk libtool automake m4 \
 	                   libncurses5-dev cvs git rsync mtools tmux screen \
-	                   nodejs nginx libzmq-dev libuuid1 luajit luarocks
+	                   nodejs nginx libzmq-dev libuuid1 luajit luarocks \
+	                   vim
 
 install-tosca:
 	#wget $(TOSCA_DOWNLOADS)/tosca-home.tgz
