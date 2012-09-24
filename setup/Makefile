@@ -4,7 +4,7 @@ all:
 	# type "make fresh" to set up from a fresh RPi image
 
 fresh: adjust-hostname tosca-disk-mount create-users install-packages \
-       install-tosca set-passwords 
+       install-tosca autorun-tosca set-passwords 
 	# installation complete, rebooting now ...
 	#shutdown -r now
 
@@ -28,9 +28,12 @@ install-packages:
 
 install-tosca:
 	#wget $(TOSCA_DOWNLOADS)/tosca-home.tgz
-	#tar -C /home tosca-home.tgz
+	#tar xfz tosca-home.tgz -C /home
 	#wget $(TOSCA_DOWNLOADS)/tosca-tools.tgz
-	#tar -C /usr/local tosca-tools.tgz
+	#tar xfz tosca-tools.tgz -C /usr/local
+
+autorun-tosca:
+	echo '@reboot if [ -x bin/onboot ]; then bin/onboot; fi' | crontab -u tosca -
 
 set-passwords:
 	passwd tosca
