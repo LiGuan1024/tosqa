@@ -34,8 +34,7 @@ install-packages:
 	# TODO: several of these installs should be moved to the build section
 	apt-get install -y bison flex gperf texinfo gawk libtool automake m4 \
 	                   libncurses5-dev cvs git rsync mtools tmux screen \
-	                   nodejs nginx libzmq-dev libuuid1 luajit luarocks \
-	                   vim libexpat1-dev
+	                   nginx libuuid1 luarocks vim libexpat1-dev
 
 install-tosca:
 	wget -N $(TOSCA_URL)/$(TOSCA_HOST)-tosca-home.tgz
