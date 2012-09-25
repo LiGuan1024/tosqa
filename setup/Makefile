@@ -1,4 +1,5 @@
-TOSCA_DOWNLOADS = http://...
+TOSCA_URL = https://github.com/downloads/Nut-Bolt/tosca/
+TOSCA_HOST = RPi
 
 all:
 	# type "make fresh" to set up from a fresh RPi image
@@ -30,16 +31,17 @@ warn-build-login:
 
 install-packages:
 	apt-get update
+	# TODO: several of these installs should be moved to the build section
 	apt-get install -y bison flex gperf texinfo gawk libtool automake m4 \
 	                   libncurses5-dev cvs git rsync mtools tmux screen \
 	                   nodejs nginx libzmq-dev libuuid1 luajit luarocks \
 	                   vim libexpat1-dev
 
 install-tosca:
-	#wget -N $(TOSCA_DOWNLOADS)/tosca-home.tgz
-	#tar xfz tosca-home.tgz -C /home
-	#wget -N $(TOSCA_DOWNLOADS)/tosca-tools.tgz
-	#tar xfz tosca-tools.tgz -C /usr/local
+	wget -N $(TOSCA_URL)/$(TOSCA_HOST)-tosca-home.tgz
+	tar xfz $(TOSCA_HOST)-tosca-home.tgz -C /home
+	wget -N $(TOSCA_URL)/$(TOSCA_HOST)-tosca-tools.tgz
+	tar xfz $(TOSCA_HOST)-tosca-tools.tgz -C /usr/local
 
 autorun-tosca:
 	echo '@reboot if [ -x bin/onboot ]; then bin/onboot; fi' | crontab -u tosca -
