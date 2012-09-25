@@ -1,5 +1,5 @@
-TOSCA_URL = https://github.com/downloads/Nut-Bolt/tosca/
-TOSCA_HOST = RPi
+TOSCA_URL = https://github.com/downloads/Nut-Bolt/tosca
+TOSCA_HOST = rpi
 
 all:
 	# type "make fresh" to set up from a fresh RPi image
