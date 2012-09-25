@@ -1,5 +1,4 @@
 DEST_DIR = /usr/local/tosca
-DEST_BIN = $(DEST_DIR)/bin
 
 CTNG_VER = crosstool-ng-1.16.0
 CTNG_URL = http://crosstool-ng.org/download/crosstool-ng/$(CTNG_VER).tar.bz2
@@ -21,7 +20,7 @@ info:
 ALL: DIRS CTNG ARMGCC LPCISP
 
 DIRS:
-	mkdir -p $(DEST_BIN) tars
+	mkdir -p $(DEST_DIR)/bin tars
 
 CTNG: ctng.ok
 ctng.ok:
@@ -31,21 +30,21 @@ ctng.ok:
 	cd $(CTNG_VER) && ./configure --prefix=$(HOME)/ctng && make install
 	date >$@
 
-ARMGCC: CTNG armggc.ok
+ARMGCC: CTNG armgcc.ok
 armgcc.ok:
 	mkdir -p mk-armgcc
 	wget -N -O mk-armgcc/.config $(CONFIG_URL)
-	cd mk-armgcc && ../ctng/ct-ng oldconfig && ../ctng/ct-ng build
-	cd $(DEST_BIN) && ln -sf ../arm-none-eabi/bin/* .
+	cd mk-armgcc && ../ctng/bin/ct-ng oldconfig && ../ctng/bin/ct-ng build
+	cd $(DEST_DIR)/bin && ln -sf ../arm-none-eabi/bin/* .
 	date >$@
 
 ARMCONFIG: CTNG
-	cd mk-armgcc && ../ctng/ct-ng menuconfig
+	cd mk-armgcc && ../ctng/bin/ct-ng menuconfig
 
 LPCISP: lpcisp.ok
 lpcisp.ok:
 	git clone $(LPCISP_URL) mk-lspisp
-	cd mk-lpcisp && make && cp lpc21isp $(DEST_BIN)
+	cd mk-lpcisp && make && cp lpc21isp $(DEST_DIR)/bin
 	date >$@
 
 TOSCA: tosca.ok
