@@ -33,12 +33,12 @@ install-packages:
 	apt-get install -y bison flex gperf texinfo gawk libtool automake m4 \
 	                   libncurses5-dev cvs git rsync mtools tmux screen \
 	                   nodejs nginx libzmq-dev libuuid1 luajit luarocks \
-	                   vim
+	                   vim libexpat1-dev
 
 install-tosca:
-	#wget $(TOSCA_DOWNLOADS)/tosca-home.tgz
+	#wget -N $(TOSCA_DOWNLOADS)/tosca-home.tgz
 	#tar xfz tosca-home.tgz -C /home
-	#wget $(TOSCA_DOWNLOADS)/tosca-tools.tgz
+	#wget -N $(TOSCA_DOWNLOADS)/tosca-tools.tgz
 	#tar xfz tosca-tools.tgz -C /usr/local
 
 autorun-tosca:
