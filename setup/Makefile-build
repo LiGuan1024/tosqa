@@ -8,11 +8,11 @@ LPCISP_URL = https://github.com/pbrier/lpc21isp.git
 info:
 	# type "make ALL" to make everything from scratch
 	# type "make DIRS" to make sure all the required directories exist
-	# type "make CTNG" to instalinstalinstall crosstool-ng (ends up in ~/ctng)
+	# type "make CTNG" to install crosstool-ng (ends up in ~/ctng)
 	# type "make ARMGCC" to install the arm-none-eabi cross-compiler
 	# type "make ARMCONFIG" to adjust the arm-none-eabi build settings
 	# type "make LPCISP" to install the lpc21isp upload tool
-	# type "make TOSCA" to set up everything in the ~tosca home directory
+	# type "make TOSCA" to set up the ~tosca home directory
 	# type "make DIST" to create the tosca-{home,tools} distribution tars
 	# type "make CLEAN" to remove all the intermediate build results
 	# type "make DISTCLEAN" to also remove everything that has been installed
@@ -33,7 +33,7 @@ ctng.ok:
 ARMGCC: CTNG armgcc.ok
 armgcc.ok:
 	mkdir -p mk-armgcc
-	wget -N -O mk-armgcc/.config $(CONFIG_URL)
+	wget -O mk-armgcc/.config $(CONFIG_URL)
 	cd mk-armgcc && ../ctng/bin/ct-ng oldconfig && ../ctng/bin/ct-ng build
 	cd $(DEST_DIR)/bin && ln -sf ../arm-none-eabi/bin/* .
 	date >$@
@@ -43,7 +43,7 @@ ARMCONFIG: CTNG
 
 LPCISP: lpcisp.ok
 lpcisp.ok:
-	git clone $(LPCISP_URL) mk-lspisp
+	git clone $(LPCISP_URL) mk-lpcisp
 	cd mk-lpcisp && make && cp lpc21isp $(DEST_DIR)/bin
 	date >$@
 
@@ -57,9 +57,9 @@ DIST: ALL TOSCA
 	tar cfz tosca-tools.tgz -C /usr/local tosca
 
 CLEAN:
-	if [ -f ctng.ok]; then rm -rf $(CTNG_VER); fi
-	if [ -f armgcc.ok]; then rm -rf mk-armgcc; fi
-	if [ -f lpcisp.ok]; then rm -rf mk-lpcisp; fi
+	if [ -f ctng.ok ]; then rm -rf $(CTNG_VER); fi
+	if [ -f armgcc.ok ]; then rm -rf mk-armgcc; fi
+	if [ -f lpcisp.ok ]; then rm -rf mk-lpcisp; fi
 
 DISTCLEAN: CLEAN
 	rm -rf *.ok ctng $(DEST_DIR)
