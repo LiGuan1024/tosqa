@@ -5,7 +5,8 @@ all:
 	# type "make fresh" to set up from a fresh RPi image
 
 fresh: adjust-hostname tosca-disk-mount create-users warn-build-login \
-       install-packages install-tosca autorun-tosca set-passwords 
+       release-console install-packages install-tosca autorun-tosca \
+       set-passwords 
 	# installation complete, rebooting now ...
 	shutdown -r now
 
@@ -28,6 +29,11 @@ warn-build-login:
 	>~build/.hushlogin
 	echo 'echo "Please insert the TOSCAUSB stick and reboot."' >~build/.bash_login
 	chown build:build ~build/.hushlogin ~build/.bash_login
+
+release-console:
+	sed -i 's/console=ttyAMA0,115200 kgdboc=ttyAMA0,115200 //' /boot/cmdline.txt
+	sed -i 's/T0:23:respawn:.sbin.getty -L ttyAMA0/#&/' /etc/inittab
+	kill -1 1
 
 install-packages:
 	apt-get update

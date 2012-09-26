@@ -48,4 +48,4 @@ firmware.elf: $(OBJ) startup.o
 	@arm-none-eabi-nm -n $? >$@
 
 clean:
-	rm -f *.{o,d,elf,hex,bin,lss,sym,map}
+	rm -f *.o *.d *.elf *.hex *.bin *.lss *.sym *.map
