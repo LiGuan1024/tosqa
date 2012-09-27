@@ -64,5 +64,5 @@ Notes
 * no way to detect a stuck or dead server, so clients will wait forever
 * a slow server (i.e. long running request) holds up all subsequent requests
 
-So all in all this is definitely not sufficient to build up the Tosca system,
-but it may be useful anyway to get acquainted with ZeroMQ in Lua.
+All in all this is definitely not sufficient to build up the Tosca system, but
+it may be useful anyway to get acquainted with ZeroMQ in Lua.
