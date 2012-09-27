@@ -34,6 +34,7 @@ release-console:
 	sed -i 's/console=ttyAMA0,115200 kgdboc=ttyAMA0,115200 //' /boot/cmdline.txt
 	sed -i 's/T0:23:respawn:.sbin.getty -L ttyAMA0/#&/' /etc/inittab
 	kill -1 1
+	echo "kernel.sysrq=0" >>/etc/sysctl.conf
 
 install-packages:
 	apt-get update
