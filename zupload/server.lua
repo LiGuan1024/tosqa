@@ -6,7 +6,7 @@ require 'bencode'
 
 -- configuration
 local PORT = 'tcp://*:9389'
-local VERBOSE = true
+local VERBOSE = ('-v' in arg)
 
 local cmds = require 'commands'
 local context = zmq.init(1)
