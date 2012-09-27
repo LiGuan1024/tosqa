@@ -1,5 +1,7 @@
 #!/usr/bin/env lua
+
 -- Simple command server, dispatches incoming requests as Lua function calls.
+-- Call as "./server.lua" or "./server.lua -v" to enable debugging output.
 
 require 'zmq'
 require 'bencode'
