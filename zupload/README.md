@@ -18,7 +18,7 @@ Principle of operation
 
 The key trick here, is that zapi.lua can wrap any call. If we were to call:
 
-        zapi.blah(123)
+    zapi.blah(123)
 
 ... then that call will be sent to the server, who has no idea what to do with
 it, throws an error, the error comes back, and we as client end up with the
@@ -45,12 +45,13 @@ No adjustment is needed on the client side. Arguments and results are wrapped
 
 In other words, if you add something like this to server.lua:
 
-        function M.triple (v)
-          return 3 * v
-        end
+    function M.triple (v)
+      return 3 * v
+    end
 
 ... then, once the server has been restarted, all clients can call this code.
-Defining an API is no harder (or easier) remotely with RPC, than locally.
+Defining an API is no harder (or easier) remotely with RPC, than locally. But
+it'll work across the network and between all languages with a ZeroMQ binding.
 
 Notes
 -----
@@ -59,7 +60,7 @@ Notes
 * note also that anything can be encoded as binary data, and sent as string
 * routing is very crude: a fixed port, and a hardwired IP address in the code
 * no recovery if the server were to crash (but all Lua errors do get caught)
-* you need to known where each service like this is running, no registry
+* you need to know where each service like this is running, no registry
 * no way to detect a stuck or dead server, so clients will wait forever
 * a slow server (i.e. long running request) holds up all subsequent requests
 
