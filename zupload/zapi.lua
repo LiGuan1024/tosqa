@@ -22,11 +22,11 @@ M.socket = context:socket(zmq.REQ)
 M.socket:connect(PORT)
 
 -- set up special behavior to capture all module accesses as function calls
--- this allows proxying "stripe.abc(...)" with arbitrary "abc" names and args
+-- this allows proxying "zapi:abc(...)" with arbitrary "abc" names and args
 local mt = {}
 setmetatable(M, mt)
 
--- translate a "stripe.abc(1,2,3)" call into a {'stripe',1,2,3} RPC request
+-- translate a "zapi:abc(1,2,3)" call into a {'abc',1,2,3} RPC request
 function mt:__index(name, ...)
   return function (context, ...)
     local s = context.socket
