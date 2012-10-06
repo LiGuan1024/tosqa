@@ -67,3 +67,8 @@ The UART is not interrupt-driven, just a first test to get something out.
 		# OBJCOPY -O binary firmware.elf firmware.bin
 
 Same gcc 4.6.3 as above.
+
+blinky-gcc - Mac (2012-10-06)
+-----------------------------
+
+Started implementing simple controllable blinky code. Work in progress.
