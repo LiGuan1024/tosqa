@@ -1,9 +1,18 @@
 // Embedded bencode support, header definitions.
 // 2012-09-29 <jc@wippler.nl> http://opensource.org/licenses/mit-license.php
 
+#include <stdint.h>
+#include <stdio.h>
+
 #include "EmBencode.h"
 
 enum { EMB_ANY, EMB_LEN, EMB_INT, EMB_STR };
+
+void EmBencode::PushCount (uint32_t num) {
+  char buf[11];
+  sprintf(buf, "%lu", num);
+  PushData(buf, strlen(buf));
+}
 
 uint8_t EmBdecode::reset () {
   count = next;

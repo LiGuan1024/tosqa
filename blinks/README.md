@@ -68,7 +68,17 @@ The UART is not interrupt-driven, just a first test to get something out.
 
 Same gcc 4.6.3 as above.
 
-blinky-gcc - Mac (2012-10-06)
------------------------------
+blinky-lmuc - Mac (2012-10-06)
+------------------------------
 
-Started implementing simple controllable blinky code. Work in progress.
+Simple controllable blinky code using Bencode packets over the serial link.
+Built with gcc4mbed and libmanyuc, both as adapted by Adam Green.
+
+    $ make
+		....
+		arm-none-eabi-size lpc17xx-mbed-Release/blinky.elf
+			 text	   data	    bss	    dec	    hex	filename
+			31240	   2236	    376	  33852	   843c	lpc17xx-mbed-Release/blinky.elf
+
+This is based on gcc 4.6.2 and uses busy polling for serial I/O. Loses input
+characters when run above 9600 baud due to stupid loop structure.

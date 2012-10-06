@@ -44,11 +44,6 @@ public:
   }
 
 protected:
-  static void PushCount (uint32_t num) {
-    char buf[11], *ptr = ultoa(num, buf, 10);
-    PushData(ptr, strlen(ptr));
-  }
-
   static void PushEnd () {
     PushChar('e');
   }
@@ -58,6 +53,7 @@ protected:
       PushChar(*p);
   }
 
+  static void PushCount (uint32_t num);
   static void PushChar (char ch);
 };
 

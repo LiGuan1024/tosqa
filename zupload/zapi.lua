@@ -2,8 +2,8 @@
 
 -- configuration
 -- local PORT = 'tcp://127.0.0.1:9389'
---local PORT = 'tcp://192.168.1.127:9389'
-local PORT = 'tcp://10.0.0.97:9389'
+local PORT = 'tcp://192.168.1.127:9389'
+--local PORT = 'tcp://10.0.0.97:9389'
 local DEBUG = false
 
 require 'zmq'
