@@ -1,0 +1,16 @@
+!!! 5
+html(lang='en',ng-app='myApp',ng-controller='AppCtrl')
+  head
+    meta(charset='utf-8')
+    meta(name='viewport',content='width=device-width')
+    title Welcome
+    include cdn
+    != SocketStream
+    
+  body()
+    nav.top-bar
+      ul.right
+        li(ng-repeat='route in routes')
+          a(href='{{route.path}}') {{route.title}}
+        
+    .ng-view
